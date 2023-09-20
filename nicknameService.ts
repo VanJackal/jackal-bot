@@ -55,5 +55,6 @@ async function updateNickname(client, userid,serverid) {
 
 
 export {
-    init
+    init,
+    updateNickname
 }

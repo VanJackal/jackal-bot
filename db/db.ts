@@ -55,7 +55,7 @@ async function getNicknames():Promise<any[]> {
 async function getNickname(userid, serverid) {
     logger.info(`Getting nickname for ${userid} in ${serverid}`)
     return new Promise((resolve, reject) => {
-        db.get(`SELECT steamid, appid, nickname FROM nicknames WHERE userid=? AND serverid=?`,
+        db.get(`SELECT * FROM nicknames WHERE userid=? AND serverid=?`,
             [userid,serverid],
             (err, row) => {
                 if (err) {
