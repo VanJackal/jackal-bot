@@ -1,0 +1,21 @@
+{
+  "name": "jackal-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^2.0.1",
+    "axios": "^1.5.0",
+    "date-and-time": "^3.0.3",
+    "discord-api-types": "^0.37.56",
+    "discord.js": "^14.13.0",
+    "sqlite3": "^5.1.6",
+    "winston": "^3.10.0"
+  }
+}
