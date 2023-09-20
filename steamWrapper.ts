@@ -3,7 +3,7 @@ import {logger} from './logger'
 const STEAM_API = "http://api.steampowered.com"
 //API Calls
 const getGames = async (steamid) => {
-	const url = `${STEAM_API}/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${steamid}&format=json`
+	const url = `${STEAM_API}/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${steamid}&format=json&include_played_free_games=true`
 	logger.debug(`Getting ${url}`)
 	const res = await axios.get(url)
 	return  res.data.response
@@ -28,8 +28,18 @@ async function topTen(steamid):Promise<[{appid:number,playtime:number}]|[]>{
 	return top
 }
 
+async function getHours(steamid,appid) {
+	logger.debug(`getting ${steamid}'s hours for ${appid}`)
+	const games = (await getGames(steamid)).games
+	const playtime = games.find((game) => {
+	    return game.appid === parseInt(appid)
+	}).playtime_forever
+	return Math.round(playtime/60)
+}
+
 
 export {
 	getGames,
-	topTen
+	topTen,
+	getHours
 }

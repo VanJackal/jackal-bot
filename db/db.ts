@@ -52,6 +52,21 @@ async function getNicknames():Promise<any[]> {
     })
 }
 
+async function getNickname(userid, serverid) {
+    logger.info(`Getting nickname for ${userid} in ${serverid}`)
+    return new Promise((resolve, reject) => {
+        db.get(`SELECT steamid, appid, nickname FROM nicknames WHERE userid=? AND serverid=?`,
+            [userid,serverid],
+            (err, row) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(row)
+                }
+            })
+    })
+}
+
 async function removeNickname(userid,serverid) {
     logger.info(`Removing nickname for ${userid} in ${serverid}`)
     return new Promise<void>((resolve, reject) => {
@@ -68,5 +83,6 @@ async function removeNickname(userid,serverid) {
 export {
     changeNickname,
     getNicknames,
+    getNickname,
     removeNickname
 }
