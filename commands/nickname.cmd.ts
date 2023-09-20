@@ -1,5 +1,6 @@
 import {SlashCommandBuilder} from "discord.js";
 import {changeNickname} from "../db/db";
+import {updateNickname} from "../nicknameService";
 
 
 export = {
@@ -32,6 +33,7 @@ export = {
 
         try{
             await changeNickname(interaction.user.id, interaction.guildId,steamid,appid,nickname)
+            await updateNickname(interaction.client, interaction.user.id,interaction.guildId)
             interaction.reply({
                 content:`Nickname changed to ${nickname}`,
                 ephemeral:true
